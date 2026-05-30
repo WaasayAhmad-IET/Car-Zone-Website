@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAR ZONE - Unleash the Luxury You Deserve</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+      header {
+            background-color: #581010;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: sticky;
+            top: 0.5rem;
+            z-index: 100;  
+        }
+        nav {
+            display: flex;
+            position: fixed; 
+            justify-content: center;
+            gap: 2rem;
+            background-color: #312c2c;
+            padding: 0.3rem;
+            width: 100%;
+            top: 0; 
+            z-index: 101; 
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+        }
+        nav a:hover {
+            color: #ff4444;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 5rem auto;
+        }
+        .filter-section,
+        .about-section,
+        .contact-section {
+            background-color: #fff;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #ccc;
+        }
+        .about-section,
+        .contact-section {
+            scroll-margin-top: 180px;
+        }
+        .about-section {
+            margin-bottom: 3rem;
+        }
+        .filter-section select,
+        .filter-section button,
+        .contact-form input,
+        .contact-form textarea {
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+        }
+        .filter-section button,
+        .contact-form button {
+            background-color: #ca1111;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .filter-section button:hover,
+        .contact-form button:hover {
+            background-color: #a50d0d;
+        }
+        .car-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        .car-card {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 1rem;
+        }
+        .car-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .car-card button {
+            width: 100%;
+            padding: 0.5rem;
+            background-color: #ca1111;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .car-card button:hover {
+            background-color: #a50d0d;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        footer {
+            background-color: #2c2c2c;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        @media (max-width: 768px) {
+            .filter-section {
+                flex-direction: column;
+            }
+            .filter-section select,
+            .filter-section button,
+            .contact-form button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="home">
+        <h1>Car Zone</h1>
+        <p>Unleash the Luxury You Deserve</p>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#cars">Cars</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="container">
+        <div class="filter-section" id="cars">
+            <h2>Filter Cars</h2>
+            <select id="brandFilter">
+                <option value="">All Brands</option>
+                <option value="Toyota">Toyota</option>
+                <option value="Honda">Honda</option>
+                <option value="Ford">Ford</option>
+                <option value="McLaren">McLaren</option>
+            </select>
+            <select id="priceFilter">
+                <option value="">Any Price</option>
+                <option value="10000">Under $10,000</option>
+                <option value="20000">Under $20,000</option>
+                <option value="50000">Under $50,000</option>
+                <option value="100000">Under $100,000</option>
+                <option value="1000000">Under $1,000,000</option>
+            </select>
+            <select id="yearFilter">
+                <option value="">Any Year</option>
+                <option value="2020">2020 and newer</option>
+                <option value="2018">2018 and newer</option>
+            </select>
+            <select id="sortBy">
+                <option value="">Sort By</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="year-desc">Year: Newest First</option>
+            </select>
+            <button onclick="filterCars()">Apply Filters</button>
+        </div>
+        <div class="car-list" id="carList">
+            <div class="loading">Loading cars...</div>
+        </div>
+        <section class="about-section" id="about">
+            <h2>About Car Zone</h2>
+            <p>Welcome to Car Zone, your trusted destination for premium used cars. We offer a wide range of luxury and performance vehicles to suit every taste and budget.</p>
+            <ul>
+                <li>High-quality, well-maintained cars</li>
+                <li>Transparent pricing and detailed vehicle history</li>
+                <li>Exceptional customer service</li>
+            </ul>
+        </section>
+        <section class="contact-section" id="contact">
+            <h2>Contact Us</h2>
+            <form class="contact-form" id="contactForm">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <textarea id="message" placeholder="Your Message" required></textarea>
+                <button type="button" onclick="validateForm()">Send Message</button>
+            </form>
+            <div class="contact-info">
+                <p><strong>Phone:</strong> +92 322-1234568</p>
+                <p><strong>Email:</strong> info@carzone.pk</p>
+                <p><strong>Address:</strong> 123 Luxury Lane,Canal Road Pakistan</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 Car Zone. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const cars = [
+            {id: 1, brand: "Toyota", model: "Corolla", year: 2020, price: 18000, image: "picss/ToyotaCorolla.jpg", description: "Excellent condition with low mileage.", mileage: "25,000 miles", transmission: "Automatic"},
+            {id: 2, brand: "Honda", model: "Civic", year: 2019, price: 16500, image: "picss/HondaCivic.jpg", description: "Fuel efficient and reliable.", mileage: "30,000 miles", transmission: "CVT"},
+            {id: 3, brand: "Ford", model: "Mustang", year: 2021, price: 32000, image: "picss/FordMustang.jpg", description: "Powerful V8 engine.", mileage: "15,000 miles", transmission: "Manual"},
+            {id: 4, brand: "Toyota", model: "Camry", year: 2018, price: 15500, image: "picss/ToyotaCamry.jpg", description: "Comfortable family sedan.", mileage: "40,000 miles", transmission: "Automatic"},
+            {id: 5, brand: "Ford", model: "F-150 Raptor", year: 2022, price: 78572, image: "picss/FordRaptor.jpg", description: "Advanced off-road capabilities.", mileage: "20,000 miles", transmission: "Automatic"},
+            {id: 6, brand: "Toyota", model: "Crown", year: 2020, price: 26786, image: "picss/Crown.jpg", description: "Luxurious interior.", mileage: "35,000 miles", transmission: "Hybrid Automatic"},
+            {id: 7, brand: "McLaren", model: "P1", year: 2015, price: 1100000, image: "picss/McLarenP1.jpg", description: "Hybrid hypercar.", mileage: "5,000 miles", transmission: "Automatic"}
+        ];
+
+        function displayCars(carsToDisplay) {
+            const carList = document.getElementById('carList');
+            carList.innerHTML = '';
+
+            if (!carsToDisplay.length) {
+                carList.innerHTML = '<p>No cars match your filters.</p>';
+                return;
+            }
+
+            for (const car of carsToDisplay) {
+                carList.innerHTML += `
+                    <div class="car-card">
+                        <img src="${car.image}" alt="${car.brand} ${car.model}" onerror="this.src='https://via.placeholder.com/300x200?text=${car.brand}+${car.model}'">
+                        <h3>${car.brand} ${car.model} (${car.year})</h3>
+                        <p><strong>Price:</strong> $${car.price.toLocaleString()}</p>
+                        <p><strong>Mileage:</strong> ${car.mileage}</p>
+                        <p><strong>Transmission:</strong> ${car.transmission}</p>
+                        <p>${car.description}</p>
+                        <button onclick="viewDetails(${car.id})">View Details</button>
+                    </div>`;
+            }
+        }
+        function filterCars() {
+            const brand = document.getElementById('brandFilter').value;
+            const maxPrice = document.getElementById('priceFilter').value;
+            const minYear = document.getElementById('yearFilter').value;
+            const sortBy = document.getElementById('sortBy').value;
+
+            let filteredCars = [...cars];
+
+            if (brand) filteredCars = filteredCars.filter(car => car.brand === brand);
+            if (maxPrice) filteredCars = filteredCars.filter(car => car.price <= +maxPrice);
+            if (minYear) filteredCars = filteredCars.filter(car => car.year >= +minYear);
+
+            if (sortBy === 'price-asc') filteredCars.sort((a, b) => a.price - b.price);
+            else if (sortBy === 'price-desc') filteredCars.sort((a, b) => b.price - a.price);
+            else if (sortBy === 'year-desc') filteredCars.sort((a, b) => b.year - a.year);
+
+            displayCars(filteredCars);
+        }
+        function viewDetails(carId) {
+            window.location.href = 'car-details.html?id=' + carId;
+        }
+        function validateForm() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            if (!name || !email || !message) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            alert('Message sent successfully!');
+            document.getElementById('contactForm').reset();
+        }
+        document.addEventListener('DOMContentLoaded', () => displayCars(cars));
+    </script>
+</body>
+</html>
